@@ -1,11 +1,14 @@
-import './App.css';
+import "./App.css";
+import Tree from "./components/Tree";
 
 function App() {
   return (
     <div>
-      <h1>hello from solomon!</h1><h2>hello from me!</h2>
+      <header>
+        <h1>my favorite tree</h1>
+      </header>
+      <Tree name="Live Oak" description="The livliest of trees" />
     </div>
-    
   );
 }
 
