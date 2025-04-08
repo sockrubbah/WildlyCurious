@@ -1,15 +1,17 @@
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/Layout";
-import NoPage from "./pages/NoPage"
-import Home from './pages/Home';
-import Browse from './pages/Browse';
-import Post from './pages/Post';
-import Profile from './pages/Profile';
-import Forum from './pages/Forum';
+import Layout from "./Layout";
+import NoPage from "./components/NoPage";
+import Home from "./pages/Home";
+import Browse from "./pages/Browse";
+import Post from "./pages/Post";
+import Profile from "./pages/Profile";
+import Forum from "./pages/Forum";
+import "./index.css";
 
-export default function App() {
-  return (
+function App() {
+  return(
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -23,7 +25,11 @@ export default function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

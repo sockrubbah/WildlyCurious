@@ -1,0 +1,136 @@
+:root {
+  --green: #00722f;
+  --yellow: #FFFF99;
+  --beige: #A68A64;
+  --red: #FF0000;
+  --orange: #FFA500;
+  --blue: #0000FF;
+  --dark-green: #008000;
+  --black: #000000;
+  --white: #FFFFFF;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--green);
+  color: var(--yellow);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.forum-box {
+  display: flex;
+  gap: 10px;
+}
+
+.forum-container {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: wrap;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.discussion-header {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+  color: var(--yellow);
+  align-content: center;
+}
+
+.forum-container .left-side {
+  width: 100%;
+  background: var(--yellow);
+  padding: 10px;
+  height: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--black);
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-content: center;
+}
+
+.forum-posts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.forum-post {
+  background: var(--green);
+  color: var(--white);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: auto;
+  align-content: center;
+}
+
+.forum-container .right-side {
+  width: 100%;
+  padding: 20px;
+  background: var(--yellow);
+  border-radius: 10px;
+  border: 2px solid var(--black);
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-content: center;
+}
+
+.filter-box {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: var(--yellow);
+}
+
+.filter-box label {
+  font-weight: bold;
+  display: block;
+}
+
+.filter-box select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid var(--green);
+  background-color: var(--white);
+}
+
+.post-box {
+  background: var(--green);
+  padding: 20px;
+  border-radius: 10px;
+  color: var(--white);
+  height: auto;
+  width: auto;
+  margin: 5px;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+}
+
+.post-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.forum-container .right-side .post-author {
+  font-style: italic;
+  align-items: center;
+}
+
+.post-text {
+  font-size: 16px;
+}
