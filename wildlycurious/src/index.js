@@ -8,6 +8,7 @@ import Browse from "./pages/Browse";
 import Post from "./pages/Post";
 import Profile from "./pages/Profile";
 import Forum from "./pages/Forum";
+import Contact from "./pages/Contact";
 import "./index.css";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="post" element={<Post />} />
           <Route path="profile" element={<Profile />} />
           <Route path="forum" element={<Forum />} />
+          <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

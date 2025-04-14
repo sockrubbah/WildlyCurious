@@ -83,8 +83,11 @@ body {
   border: 2px solid var(--black);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin: 10px;
   align-content: center;
+  align-items: center;
+  flex: 1;
 }
 
 .filter-box {
