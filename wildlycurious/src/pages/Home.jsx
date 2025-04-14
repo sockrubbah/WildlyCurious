@@ -29,8 +29,6 @@ const Home = () => {
         </div>
       </main>
 
-      
-    
       <section className="right-side">
         <div className="trending">
           <h3>Trending Posts</h3>
