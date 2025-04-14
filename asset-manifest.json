@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/wildlycurious/static/css/main.617141b1.css",
-    "main.js": "/wildlycurious/static/js/main.54ad5d65.js",
-    "index.html": "/wildlycurious/index.html",
-    "main.617141b1.css.map": "/wildlycurious/static/css/main.617141b1.css.map",
-    "main.54ad5d65.js.map": "/wildlycurious/static/js/main.54ad5d65.js.map"
+    "main.css": "/WildlyCurious/static/css/main.4e3dfdde.css",
+    "main.js": "/WildlyCurious/static/js/main.cb1cd98a.js",
+    "index.html": "/WildlyCurious/index.html",
+    "main.4e3dfdde.css.map": "/WildlyCurious/static/css/main.4e3dfdde.css.map",
+    "main.cb1cd98a.js.map": "/WildlyCurious/static/js/main.cb1cd98a.js.map"
   },
   "entrypoints": [
-    "static/css/main.617141b1.css",
-    "static/js/main.54ad5d65.js"
+    "static/css/main.4e3dfdde.css",
+    "static/js/main.cb1cd98a.js"
   ]
 }
