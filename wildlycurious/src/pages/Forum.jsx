@@ -14,9 +14,10 @@ const Forum = () => {
   }, []);
 
   return (
+    
     <div className="forum-container">
       <header>
-        <h1 style={{ textAlign: "center" }}>Browse Forum Posts!</h1>
+        <h1>Browse Forum Posts!</h1>
       </header>
 
       <div className="left-side">

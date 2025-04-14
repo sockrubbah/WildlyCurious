@@ -1,7 +1,8 @@
 import "./css/profile.css";
-import { Link } from "react-router-dom";
+
 const Profile = () => {
   return (
+    
     <div className="profile-container">
       <header>
         <h1>My Profile</h1>
@@ -9,13 +10,13 @@ const Profile = () => {
       <main className="profile-content">
         <section className="left-side">
           <div className="profile-image">
-            <img src="wildlycurious/src/images/1000064641.jpg" alt="Profile Pic" />
+            <img src="./images/1000064641.jpg" alt="Profile Pic" />
           </div>
           <input type="file" id="upload-image" />
           <button className="change-profile-pic">Change Profile Picture</button>
 
           <h2>Bio</h2>
-          <textarea id="bio-text" placeholder="I'm FernFury, an adventurer at heart..."></textarea>
+          <textarea id="bio-text" placeholder="I'm FernFury, an adventurer at heart!"></textarea>
           <button className="edit-bio">Edit Bio</button>
         </section>
 

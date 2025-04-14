@@ -6,6 +6,7 @@ import NoPage from "./components/NoPage";
 import Home from "./pages/Home";
 import Browse from "./pages/Browse";
 import Post from "./pages/Post";
+import CurrentPost from "./pages/CurrentPost";
 import Profile from "./pages/Profile";
 import Forum from "./pages/Forum";
 import Contact from "./pages/Contact";
@@ -19,6 +20,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="browse" element={<Browse />} />
           <Route path="post" element={<Post />} />
+          <Route path="current-post" element={<CurrentPost />} />
           <Route path="profile" element={<Profile />} />
           <Route path="forum" element={<Forum />} />
           <Route path="contact" element={<Contact />} />
