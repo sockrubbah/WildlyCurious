@@ -1,15 +1,4 @@
-import { useState, useEffect } from "react";
-
-const ForumGrid = ({ selectedPost, onPostClick }) => {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetch("https://wildlycuriousbackend.onrender.com/api/forum/")
-      .then((response) => response.json())
-      .then((data) => setPosts(data))
-      .catch((error) => console.error("Error fetching posts:", error));
-  }, []);
-
+const ForumGrid = ({ selectedPost, onPostClick, posts }) => {
   if (selectedPost) {
     return (
       <div className="post-box">
@@ -23,13 +12,17 @@ const ForumGrid = ({ selectedPost, onPostClick }) => {
 
   return (
     <div className="forum-grid">
-      {posts.map((post) => (
-        <div key={post._id} className="post-box" onClick={() => onPostClick(post)}>
-          <h3>{post.title}</h3>
-          <p>By {post.author}</p>
-          <p>{post.content}</p>
-        </div>
-      ))}
+      {Array.isArray(posts) && posts.length > 0 ? (
+        posts.map((post) => (
+          <div key={post._id} className="post-box" onClick={() => onPostClick(post)}>
+            <h3>{post.title}</h3>
+            <p>By {post.author}</p>
+            <p>{post.content}</p>
+          </div>
+        ))
+      ) : (
+        <p>No posts found.</p>
+      )}
     </div>
   );
 };

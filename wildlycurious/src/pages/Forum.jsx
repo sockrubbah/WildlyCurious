@@ -4,17 +4,43 @@ import ForumGrid from "../components/LoadForum";
 
 const Forum = () => {
   const [selectedPost, setSelectedPost] = useState(null);
-  const [posts, setPosts] = useState([]);
+  const [forumPosts, setForumPosts] = useState([]); // /api/forum/
+  const [isEditing, setIsEditing] = useState(false);
+  const [editContent, setEditContent] = useState({ title: "", _id: "" });
 
   useEffect(() => {
     fetch("https://wildlycuriousbackend.onrender.com/api/forum/")
-      .then((response) => response.json())
-      .then((data) => setPosts(data))
-      .catch((error) => console.error("Error fetching posts:", error));
+      .then((res) => res.json())
+      .then((data) => setForumPosts(data));
   }, []);
 
+  const handleDelete = (id) => {
+    const confirmed = window.confirm("Are you sure you want to delete this post?");
+    if (!confirmed) return;
+
+    fetch(`https://wildlycuriousbackend.onrender.com/api/forum/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          setForumPosts((prev) => prev.filter((post) => post._id !== id));
+        }
+      })
+      .catch((err) => console.error("Delete error:", err));
+  };
+
+  const handleEditSubmit = () => {
+    setForumPosts((prev) =>
+      prev.map((post) =>
+        post._id === editContent._id
+          ? { ...post, title: editContent.title }
+          : post
+      )
+    );
+    setIsEditing(false);
+  };
+
   return (
-    
     <div className="forum-container">
       <header>
         <h1>Browse Forum Posts!</h1>
@@ -25,14 +51,29 @@ const Forum = () => {
           <main className="forum-content">
             <section className="forum-topics">
               <h2>Popular Discussions</h2>
-              {posts.map((post) => (
-                <div
-                  key={post._id}
-                  className="forum-post"
-                  onClick={() => setSelectedPost(post)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {post.title}
+              {forumPosts.map((post) => (
+                <div key={post._id} className="forum-post" style={{ cursor: "pointer" }}>
+                  <div
+                    onClick={(e) => {
+                      if (e.target.tagName !== "BUTTON") setSelectedPost(post);
+                    }}
+                  >
+                    {post.title}
+                  </div>
+                  <div className="forum-post-actions">
+                    <button
+                      onClick={() => {
+                        const confirmed = window.confirm("Do you want to edit this post?");
+                        if (confirmed) {
+                          setEditContent({ title: post.title, _id: post._id });
+                          setIsEditing(true);
+                        }
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button onClick={() => handleDelete(post._id)}>Delete</button>
+                  </div>
                 </div>
               ))}
             </section>
@@ -57,8 +98,31 @@ const Forum = () => {
       </div>
 
       <div className="right-side">
-        <ForumGrid selectedPost={selectedPost} onPostClick={setSelectedPost} />
+        <ForumGrid
+          selectedPost={selectedPost}
+          onPostClick={setSelectedPost}
+        />
       </div>
+
+      {/* modal for editing */}
+      {isEditing && (
+        <div className="edit-modal">
+          <div className="edit-modal-content">
+            <h3>Edit Post</h3>
+            <input
+              type="text"
+              value={editContent.title}
+              onChange={(e) =>
+                setEditContent({ ...editContent, title: e.target.value })
+              }
+            />
+            <div className="edit-buttons">
+              <button onClick={handleEditSubmit}>Save</button>
+              <button onClick={() => setIsEditing(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

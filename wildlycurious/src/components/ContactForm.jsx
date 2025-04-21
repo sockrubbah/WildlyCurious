@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const ContactForm = () => {
+    const messageRef = useRef(null);
     const [result, setResult] = useState("");
 
     const handleSubmit = async (event) => {
@@ -8,6 +9,7 @@ const ContactForm = () => {
         setResult("Sending...");
 
         const formData = new FormData(event.target);
+        formData.append("message", messageRef.current.value);
 
         try {
             const response = await fetch("https://api.web3forms.com/submit", {
@@ -20,6 +22,7 @@ const ContactForm = () => {
             if (json.success) {
                 setResult("Message sent successfully!");
                 event.target.reset();
+                if (messageRef.current) messageRef.current.value = "";
             } else {
                 setResult("Error: Message was unable to be sent.");
             }
@@ -44,7 +47,12 @@ const ContactForm = () => {
 
             <p>
                 <label htmlFor="message">Message:</label>
-                <textarea id="message" name="message" required></textarea>
+                <textarea
+                    id="message"
+                    name="message"
+                    ref={messageRef}
+                    required
+                ></textarea>
             </p>
 
             <input type="checkbox" name="botcheck" style={{ display: "none" }} />

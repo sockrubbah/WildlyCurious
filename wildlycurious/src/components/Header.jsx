@@ -4,9 +4,9 @@ import "wildlycurious/src/pages/css/header.css";
 
 const Header = () => {
   return (
-    <body>
+    <div className="header-div">
       <header>
-        <nav class="navbar">
+        <nav className="navbar">
         <ul>
         <li><Link to="/">Home</Link></li>
             <li><Link to="/browse">Browse</Link></li>
@@ -16,7 +16,7 @@ const Header = () => {
         </ul>
       </nav>
       </header>
-    </body>
+    </div>
 
   );
 };
