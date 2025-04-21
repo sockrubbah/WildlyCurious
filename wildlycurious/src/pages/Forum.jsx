@@ -6,7 +6,7 @@ const Forum = () => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [forumPosts, setForumPosts] = useState([]); // /api/forum/
   const [isEditing, setIsEditing] = useState(false);
-  const [editContent, setEditContent] = useState({ title: "", _id: "" });
+  const [editContent, setEditContent] = useState({ title: "", content: "", _id: "" });
 
   useEffect(() => {
     fetch("https://wildlycuriousbackend.onrender.com/api/forum/")
@@ -30,14 +30,27 @@ const Forum = () => {
   };
 
   const handleEditSubmit = () => {
-    setForumPosts((prev) =>
-      prev.map((post) =>
-        post._id === editContent._id
-          ? { ...post, title: editContent.title }
-          : post
-      )
-    );
-    setIsEditing(false);
+    fetch(`https://wildlycuriousbackend.onrender.com/api/forum/${editContent._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: editContent.title,
+        content: editContent.content,
+      }),
+    })
+      .then((res) => res.json())
+      .then((updatedPost) => {
+        // update state with edited post
+        setForumPosts((prev) =>
+          prev.map((post) =>
+            post._id === updatedPost._id ? updatedPost : post
+          )
+        );
+        setIsEditing(false);
+      })
+      .catch((err) => console.error("Edit error:", err));
   };
 
   return (
@@ -65,7 +78,7 @@ const Forum = () => {
                       onClick={() => {
                         const confirmed = window.confirm("Do you want to edit this post?");
                         if (confirmed) {
-                          setEditContent({ title: post.title, _id: post._id });
+                          setEditContent({ title: post.title, content: post.content, _id: post._id });
                           setIsEditing(true);
                         }
                       }}
@@ -115,6 +128,15 @@ const Forum = () => {
               onChange={(e) =>
                 setEditContent({ ...editContent, title: e.target.value })
               }
+            />
+
+            <textarea
+              value={editContent.content}
+              onChange={(e) =>
+                setEditContent({ ...editContent, content: e.target.value })
+              }
+              rows="6"
+              placeholder="Edit content..."
             />
             <div className="edit-buttons">
               <button onClick={handleEditSubmit}>Save</button>
