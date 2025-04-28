@@ -33,21 +33,25 @@ const CreatePost = ({ fetchPosts }) => {
         data.append("content", formData.content);
         if (formData.image) data.append("image", formData.image);
     
-        // Debugging: log the FormData content
-        for (let [key, value] of data.entries()) {
-            console.log(key, value);
-        }
-    
         setLoading(true);
         try {
-            await axios.post("https://wildlycuriousbackend.onrender.com/api/forum/", data);
-            setSuccess(true);
-            setErrorMsg("");
-            setFormData({ title: "", author: "", content: "", image: null });
-            fetchPosts();
+            const response = await axios.post("https://wildlycuriousbackend.onrender.com/api/forum/", data);
+            console.log(response.data); // For debugging
+    
+            if (response.status === 200) {
+                setSuccess(true);
+                setErrorMsg("");
+                setFormData({ title: "", author: "", content: "", image: null });
+                fetchPosts();
+            } else {
+                throw new Error("Failed to create post");
+            }
         } catch (error) {
+            console.error(error);
             setErrorMsg(error.response?.data?.error || "Something went wrong");
             setSuccess(false);
+        } finally {
+            setLoading(false);
         }
     };
 
