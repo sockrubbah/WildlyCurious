@@ -26,13 +26,18 @@ const CreatePost = ({ fetchPosts }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         const data = new FormData();
         data.append("title", formData.title);
         data.append("author", formData.author);
         data.append("content", formData.content);
         if (formData.image) data.append("image", formData.image);
-
+    
+        // Debugging: log the FormData content
+        for (let [key, value] of data.entries()) {
+            console.log(key, value);
+        }
+    
         setLoading(true);
         try {
             await axios.post("https://wildlycuriousbackend.onrender.com/api/forum/", data);
@@ -50,7 +55,7 @@ const CreatePost = ({ fetchPosts }) => {
         <form onSubmit={handleSubmit} className="create-post">
             <h2>Create a New Forum Post</h2>
 
-            <label for="title">Title:</label>
+            <label htmlFor="title">Title:</label>
             <input
                 type="text"
                 name="title"
@@ -59,7 +64,7 @@ const CreatePost = ({ fetchPosts }) => {
                 required
             />
 
-            <label for="author">Author:</label>
+            <label htmlFor="author">Author:</label>
             <input
                 type="text"
                 name="author"
@@ -81,6 +86,7 @@ const CreatePost = ({ fetchPosts }) => {
                 type="file"
                 name="image"
                 accept="image/*"
+                key={formData.image ? formData.image.name : "empty"}
                 onChange={handleFileChange}
             />
 

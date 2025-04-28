@@ -6,7 +6,7 @@ const Home = () => {
       <header>
         <h1>Welcome To Wildly Curious!</h1>
       </header>
-<section class="about">
+<section className="about">
         <h2>About</h2>
         <p>Welcome to our community-driven platform, where nature lovers and curious minds come together to explore
             the wonders of the natural world. Whether you're passionate about plants, fascinated by animals, or

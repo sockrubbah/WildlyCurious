@@ -33,7 +33,14 @@ export default function LoadPosts() {
           <a href={`/post/${post._id}`}>
             <div className="post-author">{post.author}</div>
             <img
-              src={post.img_name || "/images/placeholder.jpg"}
+              src={`/images/${post.img_name && (
+                <img
+                  src={`https://wildlycuriousbackend.onrender.com/${post.img_name}`}
+                  alt={`Post by ${post.author}`}
+                  width="200px"
+                  height="200px"
+                />
+              )}`}
               alt={`Post by ${post.author}`}
               width="200px"
               height="200px"
